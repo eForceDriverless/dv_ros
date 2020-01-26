@@ -1,0 +1,3 @@
+<launch>
+    <node name="asm" pkg="asm" type="asm_node.py" output="screen"></node>
+</launch>

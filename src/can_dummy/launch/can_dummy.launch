@@ -1,0 +1,3 @@
+<launch>
+    <node name="can_dummy" pkg="can_dummy" type="can_dummy.py" output="screen"></node>
+</launch>
