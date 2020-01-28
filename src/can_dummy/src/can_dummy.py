@@ -36,7 +36,6 @@ class CANDummy(object):
 if __name__ == '__main__':
     rospy.init_node('CAN Dummy', log_level=rospy.DEBUG)
     can_dummy = CANDummy()
-    rospy.loginfo(dir(asm))
 
     rate = rospy.Rate(1)
     while not rospy.is_shutdown():

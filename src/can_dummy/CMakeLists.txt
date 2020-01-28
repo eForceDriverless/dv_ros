@@ -10,6 +10,7 @@ project(can_dummy)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
+  geometry_msgs
   message_generation
 )
 

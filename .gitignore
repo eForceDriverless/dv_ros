@@ -1,6 +1,9 @@
 # vscode
 .vscode/
 
+# pylint
+.pylintrc
+
 devel/
 logs/
 build/
