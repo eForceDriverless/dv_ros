@@ -1,0 +1,3 @@
+<launch>
+    <node name="cone_detection" pkg="cone_detection" type="cone_detection_node.py" output="screen"></node>
+</launch>
