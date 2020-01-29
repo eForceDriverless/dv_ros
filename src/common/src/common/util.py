@@ -2,6 +2,10 @@ from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3
 from common.msg import Vector3Array
 
+import common
+print(common.__path__)
+
+
 
 def make_vector3_array(arr):
     """test documentation

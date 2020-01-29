@@ -1,10 +1,28 @@
 #!/usr/bin/env python
+
+print('getting imported')
+
+
 import time
 from threading import Lock
+
+print('0')
+
 import rospy
+
+print('1')
+
 from std_msgs.msg import String, Bool
 from common.constants import AS, Mission, SubSystem, GO_SIGNAL_DELAY, MissionStatus
+print('4')
+
+
+import asm
+print(asm.__path__)
+
 from asm.msg import CarState
+
+
 
 
 class ASM(object):
