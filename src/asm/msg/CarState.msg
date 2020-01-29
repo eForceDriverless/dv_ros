@@ -7,3 +7,5 @@ string SB
 string EBS
 string ASSI
 string ASMS
+string RES
+float64 speed

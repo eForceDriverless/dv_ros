@@ -60,25 +60,31 @@ class ASM(object):
             self.handle_manual_driving()
         elif self.state == AS.AS_READY:
             self.handle_as_ready()
+        elif self.state == AS.AS_DRIVING:
+            self.handle_as_driving()
+        elif self.state == AS.AS_FINISHED:
+            self.handle_as_finished()
+        elif self.state == AS.AS_EMERGENCY:
+            self.handle_as_emergency()
         #TODO finish the state machine
 
 
     def handle_as_off(self):
-        if self.mission = Mission.MANUAL_DRIVING and self.car_state.EBS = SubSystem.UNAVAILABLE and
-            self.car_state.ASMS = SubSystem.OFF and self.car_state.TS = SubSystem.ON:
+        if self.mission == Mission.MANUAL_DRIVING and self.car_state.EBS == SubSystem.UNAVAILABLE and \
+            self.car_state.ASMS == SubSystem.OFF and self.car_state.TS == SubSystem.ON:
 
             self.state = AS.MANUAL_DRIVING
 
-        elif self.mission != Mission.MANUAL_DRIVING and self.mission != Mission.NOT_SELECTED and
-            self.car_state.EBS = SubSystem.ARMED and self.car_state.ASMS = SubSystem.ON and
-            self.car_state.TS = SubSystem.ON
+        elif self.mission != Mission.MANUAL_DRIVING and self.mission != Mission.NOT_SELECTED and \
+            self.car_state.EBS == SubSystem.ARMED and self.car_state.ASMS == SubSystem.ON and \
+            self.car_state.TS == SubSystem.ON:
 
             self.state = AS.AS_READY
             self.go_signal_received = -1
 
 
     def handle_manual_driving(self):
-        if self.car_state.TS = SubSystem.OFF:
+        if self.car_state.TS == SubSystem.OFF:
             self.state = AS.AS_OFF
 
 
@@ -87,11 +93,34 @@ class ASM(object):
         if self.go_signal_received != -1 and (curr_time - self.go_signal_received) >= GO_SIGNAL_DELAY:
             self.state = AS.AS_DRIVING
 
-        elif self.car_state.ASMS = SubSystem.OFF and self.car_state.EBS = SubSystem.X:
+        elif self.car_state.ASMS == SubSystem.OFF and self.car_state.EBS == SubSystem.X:
             self.state = AS.AS_OFF
 
-        elif self.car_state.EBS = SubSystem.ACTIVATED:
+        elif self.car_state.EBS == SubSystem.ACTIVATED:
             self.state = AS.AS_EMERGENCY
+
+
+    def handle_as_driving(self):
+        if self.car_state.EBS == SubSystem.ACTIVATED:
+            self.state = AS.AS_EMERGENCY
+        elif self.mission_status == MissionStatus.FINISHED and self.car_state.speed == 0:
+            self.state = AS.AS_FINISHED
+
+
+    def handle_as_finished(self):
+        #TODO: ASSI
+        if self.car_state.RES == SubSystem.ON:
+            self.state = AS.AS_EMERGENCY
+        elif self.car_state.ASMS == SubSystem.OFF and self.car_state.SB == SubSystem.UNAVAILABLE:
+            self.state = AS.AS_OFF
+
+
+    def handle_as_emergency(self):
+        if self.car_state.EBS == SubSystem.X and self.car_state.ASMS == SubSystem.OFF and \
+            self.car_state.SB == SubSystem.UNAVAILABLE:
+
+            self.state = AS.AS_OFF
+            #TODO turn off ASSI
 
 
 
@@ -103,5 +132,4 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         asm.publish()
         rate.sleep()
-
         

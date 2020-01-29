@@ -4,6 +4,9 @@ from common.msg import Vector3Array
 
 
 def make_vector3_array(arr):
+    """test documentation
+	test documentation
+    """
     msg = Vector3Array()
     msg.header = Header()
 
