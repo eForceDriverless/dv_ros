@@ -16,6 +16,9 @@ Welcome to DV ROS documentation!!
    packages/asm
 
 
+.. image:: arch.png
+
+
 Indices and tables
 ==================
 
