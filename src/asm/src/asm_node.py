@@ -1,31 +1,16 @@
 #!/usr/bin/env python
-
-print('getting imported')
-
-
 import time
 from threading import Lock
-
-print('0')
-
 import rospy
-
-print('1')
-
 from std_msgs.msg import String, Bool
 from common.constants import AS, Mission, SubSystem, GO_SIGNAL_DELAY, MissionStatus
-print('4')
-
-
-import asm
-print(asm.__path__)
-
 from asm.msg import CarState
 
 
-
-
 class ASM(object):
+    """Implementation of the autonomous state machine
+
+    """
     def __init__(self):
         self.state = AS.AS_OFF
         self.mission = Mission.NOT_SELECTED
@@ -84,7 +69,6 @@ class ASM(object):
             self.handle_as_finished()
         elif self.state == AS.AS_EMERGENCY:
             self.handle_as_emergency()
-        #TODO finish the state machine
 
 
     def handle_as_off(self):

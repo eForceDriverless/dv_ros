@@ -10,6 +10,8 @@ Welcome to DV ROS documentation!!
    :maxdepth: 2
    :caption: Contents:
 
+   topics
+
    packages/common
    packages/asm
 
