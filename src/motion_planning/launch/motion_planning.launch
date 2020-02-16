@@ -1,0 +1,3 @@
+<launch>
+    <node name="motion_planning" pkg="motion_planning" type="motion_planning_node.py" output="screen"></node>
+</launch>
